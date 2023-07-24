@@ -1,4 +1,4 @@
-# This is a lean Oddsportal scraper deployable on the AWS cloud using Lambda and Docker.
+# Lean Oddsportal scraper deployable on the AWS cloud using Lambda and Docker.
 
 The scraper can scrape pages of Oddsportal where aggregated (AVG) odds are shown for each game event, by feeding the AWS Lambda function with the following trigger information:
 {
