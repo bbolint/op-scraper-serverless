@@ -1,23 +1,16 @@
-# Serverless - AWS Python Docker
+# This is a lean Oddsportal scraper deployable on the AWS cloud using Lambda and Docker.
 
-This project has been generated using the `aws-nodejs-docker` template from the [Serverless framework](https://www.serverless.com/).
+The scraper can scrape pages of Oddsportal where aggregated (AVG) odds are shown for each game event, by feeding the AWS Lambda function with the following trigger information:
+{
+  "oddsportal link":"save destination on AWS S3"
+  e.g.: "https://www.oddsportal.com/hockey/usa/nhl-2022-2023/results/#/page/1":"s3://bucket-name/folder-name/folder-name/1X2-AVG/"
+}
 
-For detailed instructions, please refer to the [documentation](https://www.serverless.com/framework/docs/providers/aws/).
+This saves the odds data from https://www.oddsportal.com/hockey/usa/nhl-2022-2023/results/#/page/1 into a structured parquet file on s3 containing all relevant information from the website in a table format.
 
 ## Deployment instructions
 
-> **Requirements**: Docker. In order to build images locally and push them to ECR, you need to have Docker installed on your local machine. Please refer to [official documentation](https://docs.docker.com/get-docker/).
-
-In order to deploy your service, run the following command
-
-```
-sls deploy
-```
-
-## Test your service
-
-After successful deployment, you can test your service remotely by using the following command:
-
-```
-sls invoke --function hello
-```
+1. Install serverless and docker.
+2. You may create your own serverless and AWS config using the terminal or the json files.
+3. Serverless deploy command compiles the docker image containing the scraper, pushes it to AWS ECS and deploys the respective Lambda function.
+4. The deployed Lambda function can be invoked using a python API based on the frame "send_jobs_lambda.py".
